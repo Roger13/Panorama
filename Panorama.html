@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<title>Panorama</title>
+		<script src="main.js" type="text/javascript"></script>
+        <script src="quadTree.js" type="text/javascript"></script>
+        <script src="subjects.js" type="text/javascript"></script>
+	</head>
+	<body onLoad="panorama.oracleInit()">
+        <header style="color: white;">Panorama</header>
+		<canvas id="oracle" width="800" height="450" style="background-color: #404040;">
+			Your browser does not support HTML5 Canvas, try using Google Chrome!
+		</canvas>
+		<div id='centerWrap'>
+			<button onclick="blur()" type="button" id="b1"></button>
+			<button onclick="blur()" type="button" id="b2"></button>
+			<button onclick="blur()" type="button" id="b3"></button>
+			<button onclick="blur()" type="button" id="b4"></button>
+			<button onclick="blur()" type="button" id="b5"></button>
+		</div>
+        <canvas id="oracleInterface" width="800" height="100" style="background-color: #404040;">
+			Your browser does not support HTML5 Canvas, try using Google Chrome!
+		</canvas>
+	</body>
+</html>
+
+<!-- 
+    Credits:
+    Steven Lambert [quadTree]: https://github.com/straker/
+
+	Font used: Courier New + Impact
+	Reminder: Golden Ratio! [1 to .618]
+	To-Do: Design layout based on Adsense.
+-->
