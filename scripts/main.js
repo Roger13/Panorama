@@ -47,19 +47,27 @@ panorama.oracleInit = function () {
 	panorama.buttons.b4 = document.getElementById('b4');
     panorama.buttons.b5 = document.getElementById('b5');
     
+    panorama.entities = [];
+    
     /* -------- TEST GROUND -------- */
     var i = 0, j = 0,
-        entities = [],
         colliders = [],
         quadTree = new panorama.QuadTree({x: 0, y: 0, width: panorama.oracle.width, height: panorama.oracle.height});
     
-    for (i = 0; i < 20; i += 1) {
-        entities[i] = panorama.inhabitantMaker({coordinates: {x: 50 + 20 * i, y: 50 + 10 * i}, colors: panorama.getColors()});
+    for (i = 0; i < 1; i += 1) {
+        panorama.entities[i] = panorama.inhabitantMaker({coordinates: {x: 50 + 20 * i, y: 50 + 10 * i}, colors: panorama.getColors()});
     }
     
     panorama.buttons.b1.onmouseup = function () {
-        entities.push(panorama.inhabitantMaker({coordinates: {x: 400, y: 400}, colors: panorama.getColors()}));
+        panorama.entities.push(panorama.inhabitantMaker({coordinates: {x: 400, y: 400}, colors: panorama.getColors()}));
     };
+    
+    panorama.buttons.b2.onmouseup = function () {
+        for (i = 0; i < panorama.entities.length; i += 1) {
+            panorama.entities[i].order("moving", {x: 200, y: 200});
+        }
+    };
+    
     
     /* ------ END TEST GROUND ------ */
     
@@ -70,32 +78,32 @@ panorama.oracleInit = function () {
         panorama.oracle.shaper.clearRect(0, 0, 800, 600);	// Clear the oracle
         
         // Update subjects 
-        for (i = 0; i < entities.length; i += 1) {
-            entities[i].update();
+        for (i = 0; i < panorama.entities.length; i += 1) {
+            panorama.entities[i].update();
         }
         
         // Reset the quadTree
         quadTree.clear();
-        for (i = 0; i < entities.length; i += 1) {
-            quadTree.insert(entities[i]);
+        for (i = 0; i < panorama.entities.length; i += 1) {
+            quadTree.insert(panorama.entities[i]);
         }
         
         // Check collision
-        entities = [];
-        entities = quadTree.getAllObjects(entities);
-        for (i = 0; i < entities.length; i += 1) {
+        panorama.entities = [];
+        panorama.entities = quadTree.getAllObjects(panorama.entities);
+        for (i = 0; i < panorama.entities.length; i += 1) {
             colliders = [];
-            quadTree.findObjects(colliders, entities[i]);
+            quadTree.findObjects(colliders, panorama.entities[i]);
             for (j = 0; j < colliders.length; j += 1) {
-                panorama.checkCollision(entities[i], colliders[j]);
+                panorama.checkCollision(panorama.entities[i], colliders[j]);
             }
         }
         
         // Draw
         quadTree.draw();
-        entities.sort(function (subject1, subject2) { return subject1.collider.y - subject2.collider.y; });
-        for (i = 0; i < entities.length; i += 1) {
-            entities[i].draw();
+        panorama.entities.sort(function (subject1, subject2) { return subject1.collider.y - subject2.collider.y; });
+        for (i = 0; i < panorama.entities.length; i += 1) {
+            panorama.entities[i].draw();
         }
         
 	}

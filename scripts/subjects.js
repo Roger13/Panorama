@@ -1,6 +1,7 @@
 // spec {collider: {x: --, y: --, width: --, height: --}. colors: {color: --, darkColor: --}}
 panorama.Subject = function (spec) {
     'use strict';
+    // Public interface
     this.colors = spec.colors;
     this.collider = spec.collider;
     this.state = 'still';
@@ -21,6 +22,8 @@ panorama.inhabitantMaker = function (spec, my) {
     var inhabitant = new panorama.Subject(spec),
         // Private instance variables;
         actions = ['idle', 'thinking', 'moving'],
+        thoughts = [], // Strings are actions, non-strings are parameters for previous action
+        diplomacy = [],
         mass = 10,
         maxDisplacement = 2;
         
@@ -29,16 +32,35 @@ panorama.inhabitantMaker = function (spec, my) {
     inhabitant.collider = {x: spec.coordinates.x, y: spec.coordinates.y, width: 8, height: 4};
     inhabitant.destination = {x: spec.coordinates.x, y: spec.coordinates.y};
     inhabitant.displacement = {x: 0, y: 0};
-    inhabitant.state = 'idle';
+    inhabitant.state = 'thinking';
+    inhabitant.order = function (action, params) {
+        if (typeof action !== "string") {
+            console.log("ordem não é string");
+        } else {
+            thoughts.push(action);
+            if (params != null) {
+                thoughts.push(params);
+            }
+        }
+    };
     inhabitant.update = function () {
         switch (this.state) {
         case 'thinking':
+            if (thoughts.length === 0) {
+                this.think();
+            } else {
+                this.state = thoughts.shift();
+            }
             break;
         case 'idle':
-            this.think();
             break;
         case 'moving':
-            this.move();
+            // Check for parameters inside thoughts    
+            if (thoughts.length > 0 && typeof thoughts[0] !== "string") {
+                this.move(thoughts.shift());
+            } else {
+                this.move();
+            }
             break;
         }
     };
@@ -48,18 +70,21 @@ panorama.inhabitantMaker = function (spec, my) {
        
         // Prepair for the action
         switch (this.state) {
-        case 'thinking':
+        case 'idle':
             // 'that' fixes setTimeOut setting the context to the global object     
             var that = this;
-            setTimeout(function () {that.state = 'idle'; }, 2000);
+            setTimeout(function () {if (that.state !== 'moving') {that.state = 'thinking'; } }, 2000);
             break;
         case 'moving':
             this.destination = {x: this.collider.x + Math.round(40 * Math.random() - 20), y: this.collider.y + Math.round(40 * Math.random() - 20)};
             break;
         }
     };
-    inhabitant.move = function () { // Calculate the this.displacement components according to cosine 
+    inhabitant.move = function (destination) { // Calculate the this.displacement components according to cosine 
         this.state = 'moving';
+        if (destination != null) {
+            inhabitant.destination = destination;
+        }
         var distance = {x: inhabitant.destination.x - this.collider.x, y: inhabitant.destination.y - this.collider.y},
             angle = Math.atan(distance.y / distance.x); // Angle is between 90º and -90º
 
@@ -84,7 +109,11 @@ panorama.inhabitantMaker = function (spec, my) {
         // Change the state after finishing the movement
         if (this.displacement.x === 0 && this.displacement.y === 0) {
             this.destination = {x: this.collider.x, y: this.collider.y};
-            this.state = 'idle';
+            if (thoughts.length > 0) {
+                this.state = thoughts.shift();
+            } else {
+                this.state = 'thinking';
+            }
         }
         // Apply the this.displacement
         this.collider.x += this.displacement.x;
