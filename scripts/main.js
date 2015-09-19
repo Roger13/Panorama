@@ -16,16 +16,18 @@ panorama.getColors = function () {
 panorama.checkCollision = function (subject1, subject2) {
     "use strict";
     
-    var collision = 0;
+    var collision = 0,
+        intersectionCheck = function (subject1, subject2) {return ((subject1.collider.x < subject2.collider.x + subject2.collider.width) && (subject1.collider.x + subject1.collider.width > subject2.collider.x) && (subject1.collider.y < subject2.collider.y + subject2.collider.height) && (subject1.collider.y + subject1.collider.height > subject2.collider.y)); };
+    
     // Collision checking
-    if ((subject1.collider.x < subject2.collider.x + subject2.collider.width) && (subject1.collider.x + subject1.collider.width > subject2.collider.x) && (subject1.collider.y < subject2.collider.y + subject2.collider.height) && (subject1.collider.y + subject1.collider.height > subject2.collider.y)) {
-        // Naive fix, must change due to not all subjects having displacement attribute
+    if (intersectionCheck(subject1, subject2)) {
+        // Naive fix, must change due to not all subjects having displacement attribute 
         subject1.collider.x -= subject1.displacement.x;
         subject2.collider.x -= subject2.displacement.x;
         subject1.collider.y -= subject1.displacement.y;
         subject2.collider.y -= subject2.displacement.y;
         
-        // TO-DO Warn the subjects with whom they collided
+        // TO-DO Warn the subjects with whom they collided and prevent clipping when spawning inside
     }
 };
 
@@ -58,13 +60,17 @@ panorama.oracleInit = function () {
         panorama.entities[i] = panorama.inhabitantMaker({coordinates: {x: 50 + 20 * i, y: 50 + 10 * i}, colors: panorama.getColors()});
     }
     
+    panorama.entities[i] = panorama.propMaker({coordinates: {x: 200, y: 200}, colors: panorama.getColors()});
+    
     panorama.buttons.b1.onmouseup = function () {
         panorama.entities.push(panorama.inhabitantMaker({coordinates: {x: 400, y: 400}, colors: panorama.getColors()}));
     };
     
     panorama.buttons.b2.onmouseup = function () {
         for (i = 0; i < panorama.entities.length; i += 1) {
-            panorama.entities[i].order("moving", {x: 200, y: 200});
+            if (panorama.entities[i].order !== undefined) {
+                panorama.entities[i].order("moving", {x: 200, y: 200});
+            }
         }
     };
     

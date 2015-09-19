@@ -27,6 +27,6 @@ Panorama is a personal project for testing game designs, data structures and get
         -Simple base class
         -Simple AI system
         -Inhabitants move method
-        -Inhabitants draw method
+        -Inhabitants draw and update methods
     (quadTree.js) - Credits to Steven Lambert ( https://github.com/straker/ )
         -Functional quadTree for reducing collision checks

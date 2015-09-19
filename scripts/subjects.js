@@ -1,10 +1,12 @@
 // spec {collider: {x: --, y: --, width: --, height: --}. colors: {color: --, darkColor: --}}
 panorama.Subject = function (spec) {
     'use strict';
-    // Public interface
+    // +Public Attributes
     this.colors = spec.colors;
-    this.collider = spec.collider;
+    this.collider = spec.collider; // Origin at top-left coordinate of the base
+    this.displacement = {x: 0, y: 0};
     this.state = 'still';
+    // +Public Methods
     this.update = function () {
         console.log("Lack of update method");
         console.log(this);
@@ -16,7 +18,7 @@ panorama.Subject = function (spec) {
 };
 
 // spec: {coordinates: {x: --, y: --}, colors: {color: --, darkColor: --}}
-panorama.inhabitantMaker = function (spec, my) {
+panorama.inhabitantMaker = function (spec) {
     'use strict';
     spec.collider = {x: spec.coordinates.x, y: spec.coordinates.y, width: 8, height: 4};
     var inhabitant = new panorama.Subject(spec),
@@ -27,18 +29,16 @@ panorama.inhabitantMaker = function (spec, my) {
         mass = 10,
         maxDisplacement = 2;
         
-    
-    // Public interface
-    inhabitant.collider = {x: spec.coordinates.x, y: spec.coordinates.y, width: 8, height: 4};
+    // +Public Attributes
     inhabitant.destination = {x: spec.coordinates.x, y: spec.coordinates.y};
-    inhabitant.displacement = {x: 0, y: 0};
     inhabitant.state = 'thinking';
+    // +Public Methods
     inhabitant.order = function (action, params) {
         if (typeof action !== "string") {
-            console.log("ordem não é string");
+            console.log("Order is not a string");
         } else {
             thoughts.push(action);
-            if (params != null) {
+            if (params !== undefined) {
                 thoughts.push(params);
             }
         }
@@ -82,7 +82,7 @@ panorama.inhabitantMaker = function (spec, my) {
     };
     inhabitant.move = function (destination) { // Calculate the this.displacement components according to cosine 
         this.state = 'moving';
-        if (destination != null) {
+        if (destination !== undefined) {
             inhabitant.destination = destination;
         }
         var distance = {x: inhabitant.destination.x - this.collider.x, y: inhabitant.destination.y - this.collider.y},
@@ -120,13 +120,33 @@ panorama.inhabitantMaker = function (spec, my) {
         this.collider.y += this.displacement.y;
     };
     inhabitant.draw = function () {
+        // Top of head and neck
+        panorama.oracle.shaper.fillStyle = this.colors.darkColor;
+        panorama.oracle.shaper.fillRect(this.collider.x, this.collider.y + this.collider.height - 17, this.collider.width, 9); //Head + Neck
         // Body and face
         panorama.oracle.shaper.fillStyle = this.colors.color;
-        panorama.oracle.shaper.fillRect(this.collider.x, this.collider.y + this.collider.height - 13, 8, 4);
-        panorama.oracle.shaper.fillRect(this.collider.x, this.collider.y + this.collider.height - 8, 8, 8);
-        // Top of head
-        panorama.oracle.shaper.fillStyle = this.colors.darkColor;
-        panorama.oracle.shaper.fillRect(this.collider.x, this.collider.y + this.collider.height - 17, 8, 4);
+        panorama.oracle.shaper.fillRect(this.collider.x, this.collider.y + this.collider.height - 13, this.collider.width, 4); //Face
+        panorama.oracle.shaper.fillRect(this.collider.x, this.collider.y + this.collider.height - 8, this.collider.width, 8); //Body
     };
     return inhabitant;
+};
+
+// spec: {coordinates: {x: --, y: --}, colors: {color: --, darkColor: --}}
+panorama.propMaker = function (spec) {
+    'use strict';
+    
+    spec.collider = {x: spec.coordinates.x, y: spec.coordinates.y, width: 10, height: 10};
+    var prop = new panorama.Subject(spec);
+    
+    prop.draw = function () {
+        // Prop top
+        panorama.oracle.shaper.fillStyle = this.colors.darkColor;
+        panorama.oracle.shaper.fillRect(this.collider.x, this.collider.y + this.collider.height - this.collider.height / 2, this.collider.width, this.collider.height);
+        // Prop body
+        panorama.oracle.shaper.fillStyle = this.colors.color;
+        panorama.oracle.shaper.fillRect(this.collider.x, this.collider.y + this.collider.height, this.collider.width, this.collider.height / 2);
+        
+    };
+    prop.update = function () {};
+    return prop;
 };
