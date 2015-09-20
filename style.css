@@ -5,7 +5,7 @@ body {
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
-	background-color: #000000;
+	background-color: lightslategrey;
 	font-size: 100%;
 }
 header {
@@ -25,7 +25,7 @@ canvas {
 	margin-right: auto;
 	padding: 0px;
 	display: block;
-	border-color: tan; 
+	border-color: lightgray; 
 	border-width: 5px; 
 	border-style: solid;
 }
@@ -39,8 +39,8 @@ button {
 	padding: 0px;
 	display: inline-block;
 	float: left;
-	background-color: tan;
-	border-color: tan;
+	background-color: darkgrey;
+	border-color: darkgray;
 	border-width: 4px;
 	border-style: outset;
 } button:focus { outline: none; border-style: inset; }
@@ -52,8 +52,8 @@ p.impact {
 	padding: 0px;
 	float: left;
 	font-family:"Impact",serif; font-size:2em; 
-	color: tan;
-}p.impact:hover { color: grey; }
+	color: white;
+}p.impact:hover { color: white; }
 
 #centerWrap {
 	position: relative;

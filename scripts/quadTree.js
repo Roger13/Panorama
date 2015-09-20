@@ -18,10 +18,10 @@ panorama.QuadTree = function (boundBox, lvl) {
         for (i = 0; i < this.nodes.length; i += 1) {
             this.nodes[i].draw();
         }
-
+        /*
         panorama.oracle.shaper.strokeStyle = 'red';
         panorama.oracle.shaper.strokeRect(this.bounds.x, this.bounds.y, this.bounds.width, this.bounds.height);
-        
+        */
     };
     // Clears the quadTree and all nodes of objects
 	this.clear = function () {
