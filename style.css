@@ -8,36 +8,23 @@ body {
 	background-color: #000000;
 	font-size: 100%;
 }
-header {
-    font-family:"Impact",serif; font-size:1em;
-    position: relative;
-    width: 810px;
-	margin: 0px;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0px;
-	display: block;
-}
-canvas {
+
+canvas, button {
 	position: relative;
 	margin: 0px;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 0px;
 	display: block;
-	border-color: tan; 
-	border-width: 5px; 
-	border-style: solid;
+}
+
+canvas {
+	width: 100%;
+	height: 80%;
 }
 button {
-	position: relative;
-	width: 162px;
-	height: 97px;
-	margin: 0px;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0px;
-	display: inline-block;
+	width: 20%;
+	height: 100%;
 	float: left;
 	background-color: tan;
 	border-color: tan;
@@ -45,20 +32,10 @@ button {
 	border-style: outset;
 } button:focus { outline: none; border-style: inset; }
 
-p.impact { 
-	margin: 0px;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0px;
-	float: left;
-	font-family:"Impact",serif; font-size:2em; 
-	color: tan;
-}p.impact:hover { color: grey; }
-
 #centerWrap {
 	position: relative;
-	width: 810px;
-	height: 97px;
+	width: 100%;
+	height: 20%;
 	margin: 0px;
 	margin-left: auto;
 	margin-right: auto;

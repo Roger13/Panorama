@@ -5,24 +5,20 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<title>Panorama</title>
 		<script src="scripts/main.js" type="text/javascript"></script>
-        <script src="scripts/quadTree.js" type="text/javascript"></script>
-        <script src="scripts/subjects.js" type="text/javascript"></script>
+        <!-- <script src="scripts/quadTree.js" type="text/javascript"></script>
+        <script src="scripts/subjects.js" type="text/javascript"></script> -->
 	</head>
-	<body onLoad="panorama.oracleInit()">
-        <header style="color: white;">Panorama</header>
-		<canvas id="oracle" width="800" height="450" style="background-color: #404040;">
-			Your browser does not support HTML5 Canvas, try using Google Chrome!
+	<body onLoad="beginPanorama()">
+		<canvas id="oracle" style="background-color: #404040;">
+			Your browser does not support HTML5 Canvas
 		</canvas>
 		<div id='centerWrap'>
-			<button onclick="blur()" type="button" id="b1"></button>
-			<button onclick="blur()" type="button" id="b2"></button>
-			<button onclick="blur()" type="button" id="b3"></button>
-			<button onclick="blur()" type="button" id="b4"></button>
-			<button onclick="blur()" type="button" id="b5"></button>
+			<button onclick="blur()" onmouseout="blur()" type="button" id="b1"></button>
+			<button onclick="blur()" onmouseout="blur()" type="button" id="b2"></button>
+			<button onclick="blur()" onmouseout="blur()" type="button" id="b3"></button>
+			<button onclick="blur()" onmouseout="blur()" type="button" id="b4"></button>
+			<button onclick="blur()" onmouseout="blur()" type="button" id="b5"></button>
 		</div>
-        <canvas id="oracleInterface" width="800" height="100" style="background-color: #404040;">
-			Your browser does not support HTML5 Canvas, try using Google Chrome!
-		</canvas>
 	</body>
 </html>
 
