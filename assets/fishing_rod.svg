@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Fishing_rod" data-name="Fishing rod" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 838">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #7c7c7c;
+      }
+
+      .cls-2 {
+        fill: #352921;
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke: #727272;
+        stroke-miterlimit: 10;
+        stroke-width: 6px;
+      }
+    </style>
+  </defs>
+  <polygon class="cls-2" points="63.34 78.13 52 760 77.28 760 63.34 78.13"/>
+  <ellipse class="cls-1" cx="78" cy="722.5" rx="11" ry="37.5"/>
+  <line class="cls-3" x1="78" y1="745" x2="115" y2="745"/>
+  <ellipse cx="115" cy="745" rx="2" ry="3"/>
+</svg>

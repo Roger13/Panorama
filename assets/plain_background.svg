@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #82b280;
+      }
+
+      .cls-3 {
+        fill: #b8ebff;
+      }
+
+      .cls-4 {
+        fill: #5782b5;
+      }
+    </style>
+  </defs>
+  <rect class="cls-3" y="0" width="1080" height="1628"/>
+  <rect class="cls-4" y="1153" width="1080" height="524"/>
+  <rect class="cls-2" y="1677" width="1080" height="243"/>
+  <g>
+    <ellipse class="cls-1" cx="715.3" cy="327.92" rx="68.52" ry="58.61"/>
+    <ellipse class="cls-1" cx="773.64" cy="269.04" rx="68.52" ry="58.61"/>
+    <ellipse class="cls-1" cx="831.43" cy="231.61" rx="68.52" ry="58.61"/>
+    <ellipse class="cls-1" cx="890.31" cy="290.5" rx="68.52" ry="58.61"/>
+    <ellipse class="cls-1" cx="821.52" cy="349.39" rx="68.52" ry="58.61"/>
+    <ellipse class="cls-1" cx="919.48" cy="327.92" rx="68.52" ry="58.61"/>
+  </g>
+  <g>
+    <ellipse class="cls-1" cx="88.76" cy="710.27" rx="88.76" ry="75.92"/>
+    <ellipse class="cls-1" cx="164.32" cy="633.99" rx="88.76" ry="75.92"/>
+    <ellipse class="cls-1" cx="239.18" cy="585.51" rx="88.76" ry="75.92"/>
+    <ellipse class="cls-1" cx="315.46" cy="661.8" rx="88.76" ry="75.92"/>
+    <ellipse class="cls-1" cx="226.35" cy="738.08" rx="88.76" ry="75.92"/>
+    <ellipse class="cls-1" cx="353.24" cy="710.27" rx="88.76" ry="75.92"/>
+  </g>
+</svg>
