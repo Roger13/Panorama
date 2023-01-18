@@ -71,10 +71,8 @@ class Bait {
         this.y += this.target.dy * delta
     }
     pull = () => {
-        const bait_origin_x = RESOLUTION_WIDTH/2
-        const bait_origin_y = RESOLUTION_HEIGHT
-        this.x = bait_origin_x
-        this.y = bait_origin_y
+        this.x = RESOLUTION_WIDTH/2
+        this.y = RESOLUTION_HEIGHT
         this.target = {
             x: this.x,
             y: this.y,
@@ -227,7 +225,7 @@ function beginPanorama() {
 
     const updateLoop = (loopDelta) => {
         bait.update(loopDelta)
-        handleFishCatching()
+        if(handleFishCatching()) bait.pull()
     }
     const renderLoop = () => {
         context.clearRect(0, 0, RESOLUTION_WIDTH, RESOLUTION_HEIGHT )
